@@ -1,10 +1,9 @@
-import { Flex } from "@chakra-ui/react";
-import Image from "next/image";
+import { Flex, Heading } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <Flex as='main'>
-      <h1>Lego Site</h1>
+    <Flex as='main' alignItems='center' justify='center' minH='full'>
+      <Heading as='h1'>Lego Site</Heading>
     </Flex>
   );
 }
