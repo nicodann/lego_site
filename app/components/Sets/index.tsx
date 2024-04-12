@@ -3,6 +3,7 @@
 import { Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 
+
 type User = {
   id: number;
   name: string;
