@@ -1,24 +1,28 @@
 "use client"
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, Link } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 
 
-type User = {
+type Set = {
+  category: string;
   id: number;
+  image_url: string;
   name: string;
+  number: number;
+  url: string;
 };
 
 export default function Sets() {
-  const [data, setData] = useState<User[]>([]);
+  const [data, setData] = useState<Set[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       console.log("fetching")
       try {
-        const res = await fetch("http://localhost:5001/api/v1/users");
+        const res = await fetch("http://localhost:5001/api/sets");
         const responseData = await res.json();
-        setData(responseData.users);
+        setData(responseData);
       } catch (err) {
         console.error(err)
       }
@@ -28,7 +32,7 @@ export default function Sets() {
   }, []);
 
   useEffect(() => {
-    console.log("data:", data)
+    console.log("data:", data[0])
   }, [data]);
 
   const data2 = [{id: 1, name: 'name'}]
@@ -36,10 +40,10 @@ export default function Sets() {
   return (
     <Flex direction='column' gap={6}>
       <h1>Sets</h1>
-      {data.map((user, i) => (
+      {data.map((set, i) => (
         <Flex key={i} direction='column'>
-          {user.id}
-          {user.name}
+          {set.name}
+          <Link href={set.url}>instructions</Link>
         </Flex>
       ))}
 
