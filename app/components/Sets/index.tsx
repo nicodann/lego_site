@@ -38,14 +38,19 @@ export default function Sets() {
   const data2 = [{id: 1, name: 'name'}]
 
   return (
-    <Flex direction='column' gap={6}>
+    <Flex direction='column' gap={6} align="center">
       <h1>Sets</h1>
-      {data.map((set, i) => (
-        <Flex key={i} direction='column'>
-          {set.name}
-          <Link href={set.url}>instructions</Link>
-        </Flex>
-      ))}
+      <Flex wrap="wrap" gap={4} justify="center">
+        {data.map((set, i) => (
+          <Flex key={i} direction='column' boxSize='200px' bg='grey' p={12}>
+            <h2>
+              {set.name}
+            </h2>
+            <Link href={set.url}>instructions</Link>
+          </Flex>
+        ))}
+
+      </Flex>
 
     </Flex>
   )

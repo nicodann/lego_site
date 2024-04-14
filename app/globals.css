@@ -30,6 +30,10 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+a {
+  text-decoration: underline;
+}
+
 h1 {
   font-size: x-large;
 }
