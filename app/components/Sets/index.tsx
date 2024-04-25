@@ -1,5 +1,6 @@
 "use client"
 
+import extractImageHrefs from '@/app/lib/fetch_images';
 import { Flex, Link } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 
@@ -18,7 +19,7 @@ export default function Sets() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("fetching")
+      // console.log("fetching")
       try {
         const res = await fetch("http://localhost:5001/api/sets");
         const responseData = await res.json();
@@ -32,8 +33,15 @@ export default function Sets() {
   }, []);
 
   useEffect(() => {
-    console.log("data:", data[0])
-  }, [data]);
+    // console.log("data:", data[0])
+    if (data.length > 0) {
+      const legURL: string = data[0].url
+      // console.log("data.url:", legURL)
+      console.log("running extractImagesHrefs()")
+      extractImageHrefs('/').then((res) => {
+        console.log("images:", res)
+      })
+  }}, [data]);
 
   const data2 = [{id: 1, name: 'name'}]
 
