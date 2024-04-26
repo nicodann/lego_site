@@ -16,9 +16,11 @@ export default function SetBox(setData: SetBoxProps) {
           {setData.name}
         </h2>
         <Image 
-          src={setData.image_url 
-            ? setData.image_url 
-            : '/images/Lego_uh_oh.png'} alt={`Lego ${setData.number} ${setData.name}`} 
+          src={setData.image_url}
+          // src={setData.image_url 
+          //   ? setData.image_url 
+          //   : '/images/Lego_uh_oh.png'} 
+          alt={`Lego ${setData.number} ${setData.name}`} 
           width={100}
           height={100}
         />

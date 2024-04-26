@@ -7,41 +7,34 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import SetBox from '../SetBox';
 import fetchSetsData from '@/app/lib/routes/fetchSets';
+import fetchSetImage from '@/app/lib/routes/fetchSetImage';
+// import fetchSetsData from '@/app/lib/routes/fetchSets';
 
 export default function Sets() {
   const [data, setData] = useState<Set[]>([]);
 
   useEffect(() => {
-    fetchSetsData()
-      .then((res) => setData(res))
-    // const fetchData = async () => {
-    //   // console.log("fetching")
-    //   try {
-    //     const res = await fetch("http://localhost:5001/api/sets");
-    //     const responseData = await res.json();
-    //     setData(responseData);
-    //   } catch (err) {
-    //     console.error(err)
-    //   }
-    // }
-
-    // fetchData();
+    fetchSetsData().then((res) => setData(res))
   }, []);
 
   useEffect(() => {
-    console.log("data:", data[0])
-    // !data[0].image_url && 
-    // if (data.length > 0) {
-    //   const legURL: string = data[0].url
-    //   // console.log("data.url:", legURL)
-    //   console.log("running extractImagesHrefs()")
-    //   extractImageHrefs('/').then((res) => {
-    //     console.log("images:", res)
-    //   })
-  // }
+    // console.log("data:", data[0])
+    data.length !== 0 && data.forEach((set, i) => {
+      if (!set.image_url) {
+        fetchSetImage(set.url).then(images => {
+          images && setData(prev => {
+            console.log("prev:", prev[i])
+            prev[i].image_url = images[0]
+            console.log("prev_after:", prev[i])
+            return prev
+          })
+        })
+      }
+    })
+    console.log("updated data?:", data[0])
 }, [data]);
 
-  const data2 = [{id: 1, name: 'name'}]
+  // const data2 = [{id: 1, name: 'name'}]
 
   return (
     <Flex direction='column' gap={6} align="center">
