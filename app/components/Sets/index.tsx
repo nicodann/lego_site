@@ -6,27 +6,31 @@ import { Flex, Link } from '@chakra-ui/react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import SetBox from '../SetBox';
+import fetchSetsData from '@/app/lib/routes/fetchSets';
 
 export default function Sets() {
   const [data, setData] = useState<Set[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      // console.log("fetching")
-      try {
-        const res = await fetch("http://localhost:5001/api/sets");
-        const responseData = await res.json();
-        setData(responseData);
-      } catch (err) {
-        console.error(err)
-      }
-    }
+    fetchSetsData()
+      .then((res) => setData(res))
+    // const fetchData = async () => {
+    //   // console.log("fetching")
+    //   try {
+    //     const res = await fetch("http://localhost:5001/api/sets");
+    //     const responseData = await res.json();
+    //     setData(responseData);
+    //   } catch (err) {
+    //     console.error(err)
+    //   }
+    // }
 
-    fetchData();
+    // fetchData();
   }, []);
 
   useEffect(() => {
     console.log("data:", data[0])
+    // !data[0].image_url && 
     // if (data.length > 0) {
     //   const legURL: string = data[0].url
     //   // console.log("data.url:", legURL)
