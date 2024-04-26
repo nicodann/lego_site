@@ -6,41 +6,39 @@ import { Flex, Link } from '@chakra-ui/react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import SetBox from '../SetBox';
-import fetchSetsData from '@/app/lib/routes/fetchSets';
+import fetchSets from '@/app/lib/routes/fetchSets';
 import fetchSetImage from '@/app/lib/routes/fetchSetImage';
-// import fetchSetsData from '@/app/lib/routes/fetchSets';
+import addSetImages from '@/app/lib/add_set_images';
 
 export default function Sets() {
   const [data, setData] = useState<Set[]>([]);
+  const [updatedData, setUpdatedData] = useState<Set[]>([]);
 
   useEffect(() => {
-    fetchSetsData().then((res) => setData(res))
+    fetchSets()
+      .then((res) => {
+        // console.log("res:", res)
+        setData(res);
+      })
   }, []);
 
   useEffect(() => {
-    // console.log("data:", data[0])
-    data.length !== 0 && data.forEach((set, i) => {
-      if (!set.image_url) {
-        fetchSetImage(set.url).then(images => {
-          images && setData(prev => {
-            console.log("prev:", prev[i])
-            prev[i].image_url = images[0]
-            console.log("prev_after:", prev[i])
-            return prev
-          })
-        })
-      }
-    })
-    console.log("updated data?:", data[0])
-}, [data]);
+    addSetImages(data).then(res => setUpdatedData(res))
+  }, [data]);
 
-  // const data2 = [{id: 1, name: 'name'}]
+  useEffect(() => {
+    // console.log("data:", data)
+  }, [data]);
+
+  useEffect(() => {
+    // console.log("updatedData:", updatedData)
+  }, [updatedData]);
 
   return (
     <Flex direction='column' gap={6} align="center">
       <h1>Sets</h1>
       <Flex wrap="wrap" gap={4} justify="center">
-        {data.length !== 0 ? data.map((set, i) => <SetBox key={i} {...set}/>) : 'Loading...'}
+        {updatedData.length !== 0 ? updatedData.map((set, i) => <SetBox key={i} {...set}/>) : 'Loading...'}
       </Flex>
 
     </Flex>

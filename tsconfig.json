@@ -19,8 +19,9 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "target":"es2015"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/lib/fetch_images.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/lib/fetch_images.ts"],
   "exclude": ["node_modules"]
 }

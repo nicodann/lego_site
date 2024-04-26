@@ -1,4 +1,4 @@
-export default async function extractImageHrefs(url) {
+export default async function extractImageHrefs(url:string) {
   try {
     // Fetch the HTML content
     const response = await fetch(url);

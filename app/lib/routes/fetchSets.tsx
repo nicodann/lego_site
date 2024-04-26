@@ -1,4 +1,4 @@
-export default async function fetchSetsData() {
+export default async function fetchSets() {
   // console.log("fetching")
   try {
     const res = await fetch("http://localhost:5001/api/sets");
