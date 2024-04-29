@@ -30,7 +30,7 @@ export default function Sets() {
   }, []);
 
   return (
-    <Flex wrap="wrap" gap={4} justify="center">
+    <Flex wrap="wrap" gap={32} justify="center">
       {data.length !== 0 ? data.map((set, i) => <SetBox key={i} {...set}/>) : 'Loading...'}
     </Flex>
   )
